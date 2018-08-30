@@ -1,0 +1,9 @@
+{% block content %}
+<br>
+    <center><h1>Presonal Information</h1><br></center>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" style="margin-left: 84%;">Request for book</button><br><br>
+<!-- <p>class="save btn btn-default"</p> -->
+    </form>
+{% endblock %}

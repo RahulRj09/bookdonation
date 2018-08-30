@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
+    <div class="row">
+  <br><br>
+  <div class="col m5 card-panel white">
+<ul>
+	<li style="margin-top : 20px"><b>Book Title</b>   {{ bookss.booktitle }}</li>
+	<li><b>Book Author</b>   {{ bookss.authorname }}</li>
+	<li><b>Book Description</b>   {{ bookss.description }}</li>
+	<li><b>Book languages</b>   {{ bookss.languages }}</li><br><br>
+	<li><div class="card-image waves-effect waves-block waves-light">
+<img  src="{{ bookss.image.url }}" height="200px" width="200px" />
+</div></li>
+<hr>
+<br>
+    <center><h1>Presonal Information</h1><br></center>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" style="margin-left: 84%;">Request for book</button><br><br>
+<!-- <p>class="save btn btn-default"</p> -->
+    </form>
+
+</div>
+
+
+
+{% endblock %}
