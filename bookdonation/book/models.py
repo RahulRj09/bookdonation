@@ -3,14 +3,17 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 class Profile(models.Model):
-    user = models.OneToOneField(User,unique=True, null=False, db_index=True)
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
+    user = models.OneToOneField(User,unique=True, null=False, db_index=True,on_delete=models.CASCADE)
+    # bio = models.TextField(max_length=500, blank=True)
+    # location = models.CharField(max_length=30, blank=True)
+    # birth_date = models.DateField(null=True, blank=True)
     # book_images = models.FileField(upload_to='book_images/%Y/%m/%d/', blank=True , null=True)
+    # def __str__(self):
+    #"""String for representing the Model object."""
+        # return self.user
     def __str__(self):
-        """String for representing the Model object."""
-        return self.user
+        return str(self.user) if self.user else ''
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -21,6 +24,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Book(models.Model):
+    user= models.ForeignKey(Profile,default=1)
     booktitle   = models.CharField(max_length=200, blank=False)
     authorname  = models.CharField(max_length=200, blank=False)
     description = models.TextField(max_length=1000, blank=False)

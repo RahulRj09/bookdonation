@@ -6,7 +6,7 @@ from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.db import transaction
 from .models import Book,Profile,Userinfo
-from .forms import UserForm,ProfileForm,BookForm,AdduserForm
+from .forms import UserForm,BookForm,AdduserForm
 from django.core.files.storage import FileSystemStorage
 @login_required
 def Home(request):
@@ -38,23 +38,6 @@ def addbook(request):
         form = BookForm()
     return render(request,'addnewbook.html',{'form':form})
 
-# def userinfo(request):
-
-#     #Handling the post request data and a form is made
-#     if request.method =='POST':
-#         form=AdduserForm(request.POST)
-#         print (request.POST) 
-
-#         #validating and storing the form for further use
-#         if form.is_valid():
-#             form.save()
-#             return redirect('home')
-
-#     #new empty form instance for addbook is created
-#     else:
-#         form = AdduserForm()
-#     return render(request,'adduserinfo.html',{'form':form})
-
 def book_detail(request, pk):
     bookss = get_object_or_404(Book, pk=pk)
     #return render(request, 'book_detail.html', {'bookss': bookss})
@@ -72,9 +55,15 @@ def book_detail(request, pk):
         form = AdduserForm()
     return render(request,'book_detail.html',{'form':form, 'bookss': bookss})
 
-def Mybook(request):
-    if is_admin(request.user):
+# def Mybook(request):
+#     if is_admin(request.user):
 
-        #filtring the MoneyRequest(atleast three) and facility objects
-        my = Book.objects.all()
-        return render(request, 'mybook.html', {'my':my })
+#         #filtring the MoneyRequest(atleast three) and facility objects
+#         my = Book.objects.all()
+#         return render(request, 'mybook.html', {'my':my })
+def Mybook(request):
+    # profile = Profile.objects.filter(user__username =request.user)
+    print("ab me yaha hun")
+    my = Book.objects.filter(user__user__username = request.user)
+    print(my)
+    return render(request, 'mybook.html', {'my':my })

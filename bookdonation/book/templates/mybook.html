@@ -1,7 +1,31 @@
 {% extends 'base.html' %}
+{% block content %}
+<!-- <div class="row">
+ <div class="col s12 m6 offset-m3">
+  <H3> {{ user.email }}!</H3>
 
-{% for i in my %}
-	<ul>
-		<li>{{ i.booktitle }}</li>
-	</ul>
-{% endfor %}
+ </div>
+</div> -->
+{% for post in my %}
+<div class="container">
+ <div class="row">
+  <br><br>
+  
+  <div class="col m5 card-panel white">
+<ul>
+	<li style="margin-top : 20px"><b>Book Title : - </b>   {{ post.booktitle }}</li>
+	<li><b>Book Author : - </b>   {{ post.authorname }}</li>
+	<li><b>Book Description : - </b>   {{ post.description }}</li>
+	<li><b>Book languages : - </b>   {{ post.languages }}</li><br><br>
+	<li><div class="card-image waves-effect waves-block waves-light">
+<img  src="{{ post.image.url }}" height="200px" width="200px" />
+</div></li>
+	
+
+ <button type="button" class="btn btn-primary" style="margin-left: 89%"><a href="{% url 'book_detail' pk=post.pk %}"><b style="color: #fff">Get Book</b></a></button>
+</ul>
+</div>
+</div>
+</div>
+{% endfor%}
+{% endblock %}
