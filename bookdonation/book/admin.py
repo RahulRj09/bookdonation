@@ -3,4 +3,4 @@ from .models import *
 # Register your models here.
 admin.site.register(Profile)
 admin.site.register(Book)
-admin.site.register(Userinfo)
+admin.site.register(Book_request)

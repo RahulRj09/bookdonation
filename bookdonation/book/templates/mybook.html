@@ -1,31 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
-<!-- <div class="row">
- <div class="col s12 m6 offset-m3">
-  <H3> {{ user.email }}!</H3>
+{% for book in my %}
 
- </div>
-</div> -->
-{% for post in my %}
 <div class="container">
  <div class="row">
-  <br><br>
+  <br><br>	
   
   <div class="col m5 card-panel white">
-<ul>
-	<li style="margin-top : 20px"><b>Book Title : - </b>   {{ post.booktitle }}</li>
-	<li><b>Book Author : - </b>   {{ post.authorname }}</li>
-	<li><b>Book Description : - </b>   {{ post.description }}</li>
-	<li><b>Book languages : - </b>   {{ post.languages }}</li><br><br>
-	<li><div class="card-image waves-effect waves-block waves-light">
-<img  src="{{ post.image.url }}" height="200px" width="200px" />
-</div></li>
+<ul><br>
 	
+	<li><a class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter"  style="float: right;">Delete</a>
+</li>
+	<li><a class="btn btn-light" href="{% url 'book_edit' pk=book.pk %}"style="float: right; margin-right: 10px">Edit</a></li><br>
+	<li style="margin-top : 20px"><b>Book Title : - </b>   {{ book.booktitle }}</li>
+	<li><b>Book Author : - </b>   {{ book.authorname }}</li>
+	<li><b>Book Description : - </b>   {{ book.description }}</li>
+	<li><b>Book languages : - </b>   {{ book.languages }}</li><br><br>
+	<li><div class="card-image waves-effect waves-block waves-light">
+<img  src="{{ book.image.url }}" height="200px" width="200px" />
+</div></li>
 
- <button type="button" class="btn btn-primary" style="margin-left: 89%"><a href="{% url 'book_detail' pk=post.pk %}"><b style="color: #fff">Get Book</b></a></button>
 </ul>
+ 
 </div>
 </div>
+</div>
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete Book</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure delete the book?</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-light" data-dismiss="modal">No</a> &nbsp;&nbsp;
+        <a class="btn btn-danger" href="{% url 'book_remove' pk=book.pk %}">Yes</a>
+      </div>
+    </div>
+  </div>
 </div>
 {% endfor%}
 {% endblock %}

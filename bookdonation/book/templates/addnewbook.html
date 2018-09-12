@@ -5,7 +5,7 @@
     <center><h1>Add New Book</h1><br></center>
     <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit"  class="btn btn-primary" style="margin-left: 89%; width: 10%;">Save</button>
+        <button type="submit"  class="btn btn-primary" style="float: right; width: 10%;">Save</button>
 <!-- <p>class="save btn btn-default"</p> -->
     </form>
 {% endblock %}

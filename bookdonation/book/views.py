@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.db import transaction
-from .models import Book,Profile,Userinfo
+from .models import Book,Profile,Book_request
 from .forms import UserForm,BookForm,AdduserForm
 from django.core.files.storage import FileSystemStorage
 @login_required
@@ -20,6 +20,18 @@ def Home(request):
 def Logout(request):
     logout(request)	
     return HttpResponseRedirect('/')
+def book_edit(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == "POST":
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.save()
+            return redirect('mybook')
+    else:
+        form = BookForm(instance=book)
+    return render(request, 'book_edit.html', {'form': form})
+
 
 def addbook(request):
 
@@ -55,15 +67,14 @@ def book_detail(request, pk):
         form = AdduserForm()
     return render(request,'book_detail.html',{'form':form, 'bookss': bookss})
 
-# def Mybook(request):
-#     if is_admin(request.user):
-
-#         #filtring the MoneyRequest(atleast three) and facility objects
-#         my = Book.objects.all()
-#         return render(request, 'mybook.html', {'my':my })
 def Mybook(request):
-    # profile = Profile.objects.filter(user__username =request.user)
+    # my = Book.objects.filter(user__username =request.user)
     print("ab me yaha hun")
-    my = Book.objects.filter(user__user__username = request.user)
-    print(my)
+    my = Book.objects.filter(email = request.user.email)
     return render(request, 'mybook.html', {'my':my })
+
+
+def book_remove(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    book.delete()
+    return redirect('mybook')

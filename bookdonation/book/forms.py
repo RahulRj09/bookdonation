@@ -19,7 +19,7 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ('booktitle', 'authorname', 'description', 'languages', 'image')
+        fields = ('email','booktitle', 'authorname', 'description', 'languages', 'image')
 
 
 class AdduserForm(forms.ModelForm):
@@ -27,5 +27,5 @@ class AdduserForm(forms.ModelForm):
 
 
     class Meta:
-        model = Userinfo
+        model = Book_request
         fields = ('Name', 'Address', 'MobileNumber', 'PinCode')

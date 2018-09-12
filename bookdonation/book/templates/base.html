@@ -1,6 +1,7 @@
 <html>
 <head>
  <!-- Materialize CSS -->
+
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
  <!-- Material icons -->
@@ -8,7 +9,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <title>Django</title>
 </head>  
@@ -22,7 +22,23 @@
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'addnewbook' %}">Post                                                           NewBook</a></li> 
                 <li><a href="{% url 'mybook' %}">MyBook</a></li>
-                <li><a href="/account/logout">Logout</a></li>
+                <!-- <li><a href="/account/logout">Logout</a></li> --> 
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
+                        <ul class="dropdown-menu" style="background: #74aff2">
+                            <li><div class="row">
+                                    <div class="col s12 m6 offset-m3">
+                                    <p style="margin-right: 160px; color: white"> {{ user.email }}
+                                    </p>
+                                    <p style="margin-right: 160px; color: white"> {{ user.first }}
+                                    </p>
+
+
+                                    </div>
+                            </div><hr></li>
+
+                            <li style="margin-left: 130px"><a href="/account/logout">Logout</a></li>
+                        </ul>
+                    </li>
                            </ul>
         </div>
     </nav>
