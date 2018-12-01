@@ -6,9 +6,12 @@
   <div class="col m5 card-panel white">
 <ul>
 	<li style="margin-top : 20px"><b>Book Title</b>   {{ bookss.booktitle }}</li>
+  <li><b>Email id</b> {{ bookss.email}} </li>
 	<li><b>Book Author</b>   {{ bookss.authorname }}</li>
 	<li><b>Book Description</b>   {{ bookss.description }}</li>
-	<li><b>Book languages</b>   {{ bookss.languages }}</li><br><br>
+	<li><b>Book languages</b>   {{ bookss.languages }}</li>
+  <li><b>Book isbn</b>   {{ bookss.isbn }}</li>
+  <li><b>Book location : - </b>   {{ bookss.location }}</li><br><br>
 	<li><div class="card-image waves-effect waves-block waves-light">
 <img  src="{{ bookss.image.url }}" height="200px" width="200px" />
 </div></li>

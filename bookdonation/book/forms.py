@@ -4,7 +4,7 @@ from django import forms
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name', 'email',)
 # class ProfileForm(forms.ModelForm):
 #     class Meta:
 #         model = Profile
@@ -19,7 +19,7 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ('email','booktitle', 'authorname', 'description', 'languages', 'image')
+        fields = ('email','booktitle', 'authorname', 'description', 'languages','isbn' ,'location', 'image',)
 
 
 class AdduserForm(forms.ModelForm):
@@ -28,4 +28,4 @@ class AdduserForm(forms.ModelForm):
 
     class Meta:
         model = Book_request
-        fields = ('Name', 'Address', 'MobileNumber', 'PinCode')
+        fields = ('message',)

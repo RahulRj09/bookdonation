@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
@@ -8,18 +7,33 @@ from django.db import transaction
 from .models import Book,Profile,Book_request
 from .forms import UserForm,BookForm,AdduserForm
 from django.core.files.storage import FileSystemStorage
+from django.core.mail import send_mail
+from django.conf import settings
+
+
+
+def email(request):
+        subject = 'Request for book'
+        message = 'Hi'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = ['rahuljoshi.rj726@gmail.com']
+        send_mail( subject, message, email_from, recipient_list )
+        return redirect('home')
+
+
 @login_required
 def Home(request):
     posts = Book.objects.all()
-    # print (posts.image.url)
-    
     return render(request, 'home.html', {'posts': posts})
 @login_required
 @transaction.atomic
 
+
 def Logout(request):
     logout(request)	
     return HttpResponseRedirect('/')
+
+
 def book_edit(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == "POST":
@@ -50,6 +64,7 @@ def addbook(request):
         form = BookForm()
     return render(request,'addnewbook.html',{'form':form})
 
+
 def book_detail(request, pk):
     bookss = get_object_or_404(Book, pk=pk)
     #return render(request, 'book_detail.html', {'bookss': bookss})
@@ -66,6 +81,7 @@ def book_detail(request, pk):
     else:
         form = AdduserForm()
     return render(request,'book_detail.html',{'form':form, 'bookss': bookss})
+
 
 def Mybook(request):
     # my = Book.objects.filter(user__username =request.user)

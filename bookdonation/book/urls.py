@@ -9,4 +9,5 @@ urlpatterns = [
     #url(r'^userreq/$', views.userinfo, name='myuserinfo'),
     url(r'^bookk/(?P<pk>\d+)/$', views.book_detail, name='book_detail'),
     url(r'^account/logout/$', views.Logout),
+    url(r'^email/$', views.email),
 ]
